@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use App\Http\Requests\MoviesValidationRules;
+
 class MoviesController extends Controller
 {
     /**
@@ -32,11 +34,14 @@ class MoviesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MoviesValidationRules $request)
     {
+        $this->$request->validated();
+
         $movie = Movie::create($request->all());
         return $movie;
     }
+    
 
     /**
      * Display the specified resource.
