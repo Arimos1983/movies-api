@@ -15,12 +15,12 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Movie::class, function (Faker $faker) {
     return [
-        'title' => $faker->sentences(1, true),
+        'title' => $faker->sentence(1, true),
         'director' => $faker->name,
         'imageUrl' => $faker->imageUrl($width = 640, $height = 480),
-        'duration' => $faker->randomNumber($nbDigits = 3),
+        'duration' => $faker->numberBetween($max= 200 , $min = 90),
         'releaseDate' => $faker->date("Y-m-d"),
-        'genre' => $faker->text(30),
+        'genre' => $faker->text(10),
 
     ];
 });
