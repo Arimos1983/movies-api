@@ -82,7 +82,7 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MoviesValidationRules $request, $id)
     {
         $movie = Movie::findOrFail($id);
         $movie->update($request->all());
