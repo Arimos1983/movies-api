@@ -15,7 +15,13 @@ class MoviesController extends Controller
      */
     public function index()
     {
+        $title = request()->input('title');
+
+        if($title){
+            return Movie::filterMovie($title);
+        }else{
         return Movie::all();
+        }
     }
 
     /**
@@ -36,12 +42,12 @@ class MoviesController extends Controller
      */
     public function store(MoviesValidationRules $request)
     {
-        $this->$request->validated();
+
 
         $movie = Movie::create($request->all());
         return $movie;
     }
-    
+
 
     /**
      * Display the specified resource.

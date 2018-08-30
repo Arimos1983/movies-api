@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MoviesValidationRules extends FormRequest
 {
@@ -13,7 +14,7 @@ class MoviesValidationRules extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,10 +27,10 @@ class MoviesValidationRules extends FormRequest
         return [
             'title' => [
                 'required',
-                Rule::unique('movies')->where('releaseDate', $request->all('releaseDate'))],
-             
+                Rule::unique('movies')->where('releaseDate', request('releaseDate'))],
+
             "director"=>"required",
-            "duration"=>"required|min:1|max:500",
+            "duration"=>"required|numeric|min:1|max:500",
             "releaseDate"=>"required",
             "imageUrl"=> 'url'
         ];
