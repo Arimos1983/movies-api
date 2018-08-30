@@ -8,11 +8,18 @@ class Movie extends Model
 {
     protected $fillable = ['director','imageUrl','duration','releaseDate','genre','title' ];
 
-    protected static function filterMovie($search){
+    protected static function filterMovie($title,$skip,$take){
 
-        $movies = Movie::where('title', 'like','%'.$search.'%')->orderBy('title')->get();
-
-        return $movies;
+        if($skip && $take)
+        {
+            $movies = Movie::where('title', 'like','%'.$title.'%')->skip($skip)->take($take)->get();
+            return $movies;
+        }
+        else
+        {
+            $movies = Movie::where('title', 'like','%'.$title.'%')->take($take)->get();
+            return $movies;
+        }
     }
 }
 
